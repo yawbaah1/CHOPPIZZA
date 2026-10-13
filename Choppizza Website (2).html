@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choppizza - Big Taste. Small Price.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#083323',
+                            green: '#0C3B2E',
+                            lightgreen: '#145241',
+                            yellow: '#FFC83B',
+                            orange: '#F26122',
+                            cream: '#FAF7F0',
+                            cardBg: '#FFFDF9'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF7F0;
+            color: #1a1a1a;
+        }
+        .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF7F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0C3B2E;
+            border-radius: 4px;
+        }
+        /* Notification badge pulse */
+        @keyframes customPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        .pulse-badge {
+            animation: customPulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-gray-800 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-brand-green/95 backdrop-blur-md text-white shadow-md transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="bg-brand-yellow text-brand-dark p-2 rounded-xl font-bold transition flex items-center justify-center shadow-md group-hover:rotate-6">
+                    <i class="fa-solid font-heading text-xl fa-pizza-slice"></i>
+                </div>
+                <div>
+                    <span class="font-heading text-2xl font-bold tracking-wide text-brand-yellow">Choppizza<span class="text-brand-orange">.</span></span>
+                    <span class="block text-[10px] text-emerald-200 tracking-wider font-semibold -mt-1 uppercase">Big Taste. Small Price.</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6 font-medium text-sm text-emerald-100">
+                <a href="#menu" class="hover:text-brand-yellow transition">Menu & Flavours</a>
+                <a href="#why-us" class="hover:text-brand-yellow transition">Why Choppizza</a>
+                <a href="#momo" class="hover:text-brand-yellow transition">MoMo Payment</a>
+                <a href="#contact" class="hover:text-brand-yellow transition">Contact</a>
+            </nav>
+
+            <!-- Cart Button -->
+            <button onclick="toggleCartModal()" class="relative bg-brand-yellow hover:bg-yellow-400 text-brand-dark font-bold px-4 py-2 rounded-full shadow-lg transition flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="hidden sm:inline">My Order</span>
+                <span id="cart-count" class="bg-brand-orange text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="relative bg-brand-green text-white py-12 lg:py-20 overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center relative z-10">
+            <!-- Hero Text -->
+            <div class="space-y-6 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 bg-brand-lightgreen border border-emerald-600/40 text-brand-yellow text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm">
+                    <i class="fa-solid fa-fire text-brand-orange"></i> Fresh • Tasty • Affordable
+                </div>
+                <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                    Pizza that fits <br class="hidden sm:block">
+                    <span class="text-brand-yellow underline decoration-brand-orange decoration-4 underline-offset-4">your vibe!</span>
+                </h1>
+                <p class="text-emerald-100 text-base sm:text-lg max-w-lg mx-auto md:mx-0">
+                    Delicious mini-pizzas & meals crafted for <strong class="text-white font-semibold">students & office workers</strong>. Order directly via WhatsApp or add to cart!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+                    <a href="#menu" class="bg-brand-yellow hover:bg-yellow-400 text-brand-dark font-bold px-8 py-3.5 rounded-2xl shadow-xl transition transform active:scale-95 flex items-center justify-center gap-2 text-base">
+                        <i class="fa-solid fa-utensils"></i> Browse Menu
+                    </a>
+                    <a href="https://wa.me/233207125221?text=Hello%20Choppizza!%20I%20would%20like%20to%20place%20an%20order." target="_blank" class="bg-emerald-800/90 hover:bg-emerald-800 text-white font-semibold px-6 py-3.5 rounded-2xl border border-emerald-500/50 transition flex items-center justify-center gap-2 text-base shadow-md">
+                        <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i> Order via WhatsApp
+                    </a>
+                </div>
+                <!-- Call / WhatsApp Contact Banner -->
+                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs sm:text-sm font-semibold text-emerald-200">
+                    <a href="tel:0207125221" class="flex items-center gap-2 bg-brand-lightgreen/80 px-3 py-1.5 rounded-xl border border-emerald-600/40 hover:text-white transition">
+                        <i class="fa-solid fa-phone text-brand-yellow"></i> 0207125221
+                    </a>
+                    <a href="tel:0501234567" class="flex items-center gap-2 bg-brand-lightgreen/80 px-3 py-1.5 rounded-xl border border-emerald-600/40 hover:text-white transition">
+                        <i class="fa-solid fa-mobile-screen-button text-brand-yellow"></i> 050 123 4567
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image Preview -->
+            <div class="relative flex justify-center">
+                <div class="relative w-full max-w-md bg-gradient-to-b from-brand-lightgreen/80 to-brand-green/90 rounded-3xl border border-emerald-600/30 shadow-2xl overflow-hidden group">
+                    <div class="relative h-64 w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Fresh Hot Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-green via-transparent to-transparent"></div>
+                        <div class="absolute top-3 right-3 bg-brand-orange text-white font-heading font-bold text-xs uppercase px-3 py-1 rounded-full shadow-md pulse-badge">
+                            Small Bites. Big Joy.
+                        </div>
+                    </div>
+                    <div class="p-6 text-center -mt-6 relative z-10">
+                        <h3 class="font-heading text-2xl font-bold text-brand-yellow mb-1">Signature Mini Pizzas</h3>
+                        <p class="text-xs text-emerald-200 mb-4">Fresh toppings, rich melted cheese & savory local spices.</p>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs font-semibold py-3 bg-black/30 rounded-xl mb-4 border border-white/10">
+                            <div class="p-1">
+                                <p class="text-gray-300">Suya Chicken</p>
+                                <p class="text-brand-yellow font-bold text-sm">GH₵ 28</p>
+                            </div>
+                            <div class="p-1 border-x border-emerald-700/50">
+                                <p class="text-gray-300">Jollof Twist</p>
+                                <p class="text-brand-yellow font-bold text-sm">GH₵ 25</p>
+                            </div>
+                            <div class="p-1">
+                                <p class="text-gray-300">Veggie Mini</p>
+                                <p class="text-brand-yellow font-bold text-sm">GH₵ 20</p>
+                            </div>
+                        </div>
+                        <a href="#menu" class="inline-block text-xs text-brand-yellow hover:underline font-semibold">Explore All Flavours Below ↓</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-10 bg-white border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 rounded-2xl bg-brand-cream/60 border border-amber-100/80 transition hover:shadow-md">
+                    <div class="w-12 h-12 mx-auto mb-3 bg-brand-green/10 text-brand-green rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-gray-900">Fresh Ingredients</h4>
+                    <p class="text-xs text-gray-600 mt-1">Sourced fresh daily for ultimate quality.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-brand-cream/60 border border-amber-100/80 transition hover:shadow-md">
+                    <div class="w-12 h-12 mx-auto mb-3 bg-brand-green/10 text-brand-green rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-gray-900">Quality Taste</h4>
+                    <p class="text-xs text-gray-600 mt-1">Authentic flavors with local spice twists.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-brand-cream/60 border border-amber-100/80 transition hover:shadow-md">
+                    <div class="w-12 h-12 mx-auto mb-3 bg-brand-green/10 text-brand-green rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-gray-900">Affordable Prices</h4>
+                    <p class="text-xs text-gray-600 mt-1">Big budget-friendly bites starting at GH₵20.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-brand-cream/60 border border-amber-100/80 transition hover:shadow-md">
+                    <div class="w-12 h-12 mx-auto mb-3 bg-brand-green/10 text-brand-green rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-gray-900">Quick Turnaround</h4>
+                    <p class="text-xs text-gray-600 mt-1">Hot and ready fast for work & study breaks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-16 max-w-6xl mx-auto px-4 flex-grow">
+        <div class="text-center mb-12">
+            <span class="text-brand-orange font-bold text-sm tracking-wider uppercase">Mouth-Watering Menu</span>
+            <h2 class="font-heading text-3xl sm:text-4xl font-bold text-brand-green mt-1">Our Flavours & Pricing</h2>
+            <p class="text-gray-600 text-sm max-w-md mx-auto mt-2">Order an individual pizza instantly on WhatsApp or add multiple items to your cart!</p>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Item 1: Suya Chicken Mini -->
+            <div class="bg-brand-cardBg rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+                <div>
+                    <div class="relative h-48 w-full overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Suya Chicken Mini Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase shadow">Spicy Favorite</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-heading text-xl font-bold text-gray-900 group-hover:text-brand-green transition">Suya Chicken Mini</h3>
+                            <span class="font-heading text-2xl font-bold text-brand-green whitespace-nowrap">GH₵ 28</span>
+                        </div>
+                        <p class="text-brand-orange text-xs font-semibold italic">Smoky. Spicy. Addictive.</p>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Loaded with grilled suya spiced chicken, sliced onions, peppers, and hot mozzarella melt.</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 space-y-2">
+                    <button onclick="orderSingleWhatsApp('Suya Chicken Mini', 28)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Order Item via WhatsApp
+                    </button>
+                    <button onclick="addToCart('Suya Chicken Mini', 28)" class="w-full bg-brand-green hover:bg-brand-lightgreen text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 2: Jollof Chicken Mini -->
+            <div class="bg-brand-cardBg rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+                <div>
+                    <div class="relative h-48 w-full overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80" alt="Jollof Chicken Mini Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-yellow text-brand-dark font-bold text-xs px-3 py-1 rounded-full uppercase shadow">Signature</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-heading text-xl font-bold text-gray-900 group-hover:text-brand-green transition">Jollof Chicken Mini</h3>
+                            <span class="font-heading text-2xl font-bold text-brand-green whitespace-nowrap">GH₵ 25</span>
+                        </div>
+                        <p class="text-brand-orange text-xs font-semibold italic">Our signature. A local twist.</p>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Infused with classic jollof aromatics, seasoned chicken chunks, fresh bell peppers and rich cheese.</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 space-y-2">
+                    <button onclick="orderSingleWhatsApp('Jollof Chicken Mini', 25)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Order Item via WhatsApp
+                    </button>
+                    <button onclick="addToCart('Jollof Chicken Mini', 25)" class="w-full bg-brand-green hover:bg-brand-lightgreen text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 3: Veggie Mini -->
+            <div class="bg-brand-cardBg rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+                <div>
+                    <div class="relative h-48 w-full overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" alt="Veggie Mini Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-emerald-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase shadow">Fresh Veggies</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-heading text-xl font-bold text-gray-900 group-hover:text-brand-green transition">Veggie Mini</h3>
+                            <span class="font-heading text-2xl font-bold text-brand-green whitespace-nowrap">GH₵ 20</span>
+                        </div>
+                        <p class="text-brand-orange text-xs font-semibold italic">Fresh. Light. Filling.</p>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Sweet corn, crisp bell peppers, red onions, black olives, and rich tomato sauce layer.</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 space-y-2">
+                    <button onclick="orderSingleWhatsApp('Veggie Mini', 20)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Order Item via WhatsApp
+                    </button>
+                    <button onclick="addToCart('Veggie Mini', 20)" class="w-full bg-brand-green hover:bg-brand-lightgreen text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 4: 8-inch Personal Pizza -->
+            <div class="bg-brand-cardBg rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+                <div>
+                    <div class="relative h-48 w-full overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80" alt="8-inch Personal Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-blue-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase shadow">Full Size</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-heading text-xl font-bold text-gray-900 group-hover:text-brand-green transition">8-inch Personal Pizza</h3>
+                            <span class="font-heading text-2xl font-bold text-brand-green whitespace-nowrap">GH₵ 35</span>
+                        </div>
+                        <p class="text-brand-orange text-xs font-semibold italic">Hearty personal feast.</p>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Slightly larger crust filled generously with your choice of standard toppings for full satisfaction.</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 space-y-2">
+                    <button onclick="orderSingleWhatsApp('8-inch Personal Pizza', 35)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Order Item via WhatsApp
+                    </button>
+                    <button onclick="addToCart('8-inch Personal Pizza', 35)" class="w-full bg-brand-green hover:bg-brand-lightgreen text-white font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 5: Personal Pizza + Drink Combo -->
+            <div class="bg-brand-cardBg rounded-3xl border-2 border-brand-yellow shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group md:col-span-2 lg:col-span-2">
+                <div class="grid md:grid-cols-2 items-center">
+                    <div class="relative h-56 md:h-full w-full overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80" alt="Personal Pizza and Drink Combo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-orange text-white font-bold text-xs px-3 py-1 rounded-full uppercase shadow">Best Value Combo</span>
+                    </div>
+                    <div class="p-6 flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-heading text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-brand-green transition">Personal Pizza + Drink</h3>
+                                <span class="font-heading text-2xl sm:text-3xl font-bold text-brand-green whitespace-nowrap">GH₵ 45</span>
+                            </div>
+                            <p class="text-brand-orange text-xs font-semibold italic">The ultimate lunch special for office workers & students.</p>
+                            <p class="text-xs text-gray-500 mt-2 leading-relaxed">An 8-inch Personal Pizza paired with a chilled refreshing drink of your choice. Saves money and satisfies hunger!</p>
+                        </div>
+                        <div class="mt-6 space-y-2">
+                            <button onclick="orderSingleWhatsApp('Personal Pizza + Drink Combo', 45)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                                <i class="fa-brands fa-whatsapp text-base"></i> Order Combo via WhatsApp
+                            </button>
+                            <button onclick="addToCart('Personal Pizza + Drink Combo', 45)" class="w-full bg-brand-yellow hover:bg-yellow-400 text-brand-dark font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2 text-xs">
+                                <i class="fa-solid fa-cart-plus"></i> Add Combo to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="momo" class="py-12 bg-emerald-900 text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="bg-brand-green/90 border border-emerald-600/50 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 bg-yellow-400/20 text-brand-yellow text-xs font-bold px-3 py-1 rounded-full">
+                            <i class="fa-solid fa-mobile-screen-button"></i> Mobile Money Payment
+                        </div>
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold">MoMo Account Details</h3>
+                        <p class="text-xs sm:text-sm text-emerald-200 max-w-md">
+                            Pay conveniently via Mobile Money before or upon delivery confirmation.
+                        </p>
+                    </div>
+
+                    <!-- MoMo Card -->
+                    <div class="w-full md:w-auto bg-brand-lightgreen p-5 rounded-2xl border border-emerald-500/40 text-center min-w-[280px]">
+                        <p class="text-xs text-emerald-200 uppercase tracking-widest font-bold">MoMo Number</p>
+                        <div class="flex items-center justify-center gap-3 my-2">
+                            <span id="momo-num" class="font-heading text-2xl font-bold text-brand-yellow tracking-wider">0207125221</span>
+                            <button onclick="copyToClipboard('0207125221', 'copied-msg')" class="bg-brand-yellow hover:bg-yellow-400 text-brand-dark p-2 rounded-xl text-xs font-bold transition flex items-center gap-1 shadow" title="Copy MoMo Number">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                        <p id="copied-msg" class="text-[11px] text-green-300 h-4 font-semibold opacity-0 transition-opacity">Copied to clipboard!</p>
+                        <div class="mt-2 pt-2 border-t border-emerald-600/40 text-xs text-emerald-100 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-brand-yellow"></i> Verified Business Number
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between overflow-hidden transform transition-transform duration-300">
+            <!-- Header -->
+            <div class="bg-brand-green text-white p-5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bag-shopping text-brand-yellow text-xl"></i>
+                    <h3 class="font-heading text-xl font-bold">Your Cart</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="text-emerald-200 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items" class="p-5 flex-grow overflow-y-auto space-y-4">
+                <!-- Dynamic Items Inserted Here -->
+            </div>
+
+            <!-- Delivery Preference & Checkout Footer -->
+            <div class="p-5 bg-stone-50 border-t border-stone-200 space-y-4">
+                <!-- Delivery/Pickup Selector -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Fulfillment Method:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="border rounded-xl p-2.5 text-center cursor-pointer flex items-center justify-center gap-2 text-xs font-semibold bg-white text-gray-700 has-[:checked]:border-brand-green has-[:checked]:bg-emerald-50 has-[:checked]:text-brand-green transition">
+                            <input type="radio" name="orderType" value="Delivery" checked class="hidden" onchange="renderCart()">
+                            <i class="fa-solid fa-truck-fast"></i> Delivery
+                        </label>
+                        <label class="border rounded-xl p-2.5 text-center cursor-pointer flex items-center justify-center gap-2 text-xs font-semibold bg-white text-gray-700 has-[:checked]:border-brand-green has-[:checked]:bg-emerald-50 has-[:checked]:text-brand-green transition">
+                            <input type="radio" name="orderType" value="Pickup" class="hidden" onchange="renderCart()">
+                            <i class="fa-solid fa-store"></i> Pickup
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Customer Details -->
+                <div class="space-y-2">
+                    <input type="text" id="cust-name" placeholder="Your Name / Office / School" class="w-full text-xs px-4 py-2.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
+                    <input type="text" id="cust-notes" placeholder="Delivery Location / Landmark / Special Notes" class="w-full text-xs px-4 py-2.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
+                </div>
+
+                <!-- Total Amount -->
+                <div class="flex justify-between items-center py-2 border-t border-stone-200">
+                    <span class="font-heading text-base font-bold text-gray-800">Total Price:</span>
+                    <span id="cart-total" class="font-heading text-2xl font-bold text-brand-green">GH₵ 0</span>
+                </div>
+
+                <!-- Checkout Button -->
+                <button onclick="sendCartWhatsAppOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Send Full Order via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact" class="bg-brand-dark text-white pt-12 pb-8 border-t border-emerald-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+
+                <!-- Column 1: Brand Info -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-brand-yellow text-brand-dark p-1.5 rounded-lg font-bold flex items-center justify-center">
+                            <i class="fa-solid font-heading fa-pizza-slice text-sm"></i>
+                        </div>
+                        <span class="font-heading text-xl font-bold text-brand-yellow">Choppizza</span>
+                    </div>
+                    <p class="text-xs text-emerald-200 leading-relaxed">
+                        Big Taste. Small Price. Serving high quality, affordable mini-pizzas and snacks tailored for students and busy office workers.
+                    </p>
+                    <p class="text-xs font-semibold text-brand-yellow pt-1">
+                        Pickup & Delivery (Selected Areas)
+                    </p>
+                </div>
+
+                <!-- Column 2: Quick Links / Contact -->
+                <div class="space-y-3">
+                    <h4 class="font-heading text-base font-bold text-brand-yellow">Contact & Orders</h4>
+                    <ul class="space-y-2 text-xs text-emerald-100">
+                        <li>
+                            <a href="tel:0207125221" class="flex items-center gap-2 hover:text-brand-yellow transition">
+                                <i class="fa-solid fa-phone text-brand-yellow"></i> 
+                                <span>0207125221 (Primary / MoMo)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:0501234567" class="flex items-center gap-2 hover:text-brand-yellow transition">
+                                <i class="fa-solid fa-phone text-brand-yellow"></i> 
+                                <span>050 123 4567</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/233207125221" target="_blank" class="flex items-center gap-2 hover:text-brand-yellow transition">
+                                <i class="fa-brands fa-whatsapp text-green-400"></i> 
+                                <span>WhatsApp: 0207125221</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/choppizza_gh" target="_blank" class="flex items-center gap-2 hover:text-brand-yellow transition">
+                                <i class="fa-brands fa-instagram text-pink-400"></i> 
+                                <span>@choppizza_gh</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Payment Info -->
+                <div class="space-y-3">
+                    <h4 class="font-heading text-base font-bold text-brand-yellow">MoMo Payment</h4>
+                    <div class="bg-brand-green/60 p-3 rounded-xl border border-emerald-800 text-xs space-y-1">
+                        <p class="text-emerald-200">Mobile Money Number:</p>
+                        <p class="font-bold text-white text-sm">0207125221</p>
+                        <p class="text-[10px] text-emerald-300">Fast & Secure Mobile Payment</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-emerald-900/80 pt-6 text-center text-xs text-emerald-300 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p>&copy; 2026 Choppizza. All rights reserved.</p>
+                <p class="text-emerald-400 font-semibold">Small Bites. Big Joy.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Shopping Cart State
+        let cart = [];
+
+        // Primary Business WhatsApp Number
+        const WHATSAPP_NUMBER = "233207125221";
+
+        // Add Item to Cart
+        function addToCart(name, price) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartBadge();
+            renderCart();
+            
+            // Visual Feedback
+            const cartBtn = document.querySelector('button[onclick="toggleCartModal()"]');
+            cartBtn.classList.add('scale-110');
+            setTimeout(() => cartBtn.classList.remove('scale-110'), 200);
+        }
+
+        // Update Item Quantity in Cart
+        function updateQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartBadge();
+            renderCart();
+        }
+
+        // Update Cart Counter Badge
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalCount;
+        }
+
+        // Toggle Cart Modal Drawer
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Render Cart Items
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalElement = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 opacity-40"></i>
+                        <p class="font-semibold text-gray-600">Your cart is currently empty.</p>
+                        <p class="text-xs text-gray-400 mt-1">Select pizzas from our menu to start your order!</p>
+                    </div>
+                `;
+                totalElement.innerText = "GH₵ 0";
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                html += `
+                    <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl border border-stone-200">
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-xs sm:text-sm">${item.name}</h4>
+                            <p class="text-[11px] text-gray-500">GH₵ ${item.price} each</p>
+                        </div>
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="flex items-center bg-white rounded-xl border border-stone-300">
+                                <button onclick="updateQuantity(${index}, -1)" class="px-2 py-0.5 text-gray-600 hover:text-red-600 font-bold text-xs">-</button>
+                                <span class="px-2 text-xs font-bold text-gray-800">${item.quantity}</span>
+                                <button onclick="updateQuantity(${index}, 1)" class="px-2 py-0.5 text-gray-600 hover:text-green-600 font-bold text-xs">+</button>
+                            </div>
+                            <span class="font-bold text-brand-green text-xs sm:text-sm min-w-[50px] text-right">GH₵ ${itemTotal}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalElement.innerText = `GH₵ ${total}`;
+        }
+
+        // Single Item Direct WhatsApp Order
+        function orderSingleWhatsApp(itemName, price) {
+            let msg = `*CHOPPIZZA QUICK ORDER*\n`;
+            msg += `-------------------------\n`;
+            msg += `*Item:* ${itemName}\n`;
+            msg += `*Price:* GH₵ ${price}\n`;
+            msg += `*Quantity:* 1\n`;
+            msg += `-------------------------\n`;
+            msg += `Please let me know how to complete my payment and delivery details!`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+        }
+
+        // Full Cart WhatsApp Order
+        function sendCartWhatsAppOrder() {
+            if (cart.length === 0) {
+                alert("Your cart is empty! Please add items first.");
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim() || 'Customer';
+            const notes = document.getElementById('cust-notes').value.trim() || 'None';
+            const orderTypeRadios = document.getElementsByName('orderType');
+            let selectedType = 'Delivery';
+
+            for (const radio of orderTypeRadios) {
+                if (radio.checked) {
+                    selectedType = radio.value;
+                    break;
+                }
+            }
+
+            let orderSummary = `*NEW CHOPPIZZA CART ORDER*\n`;
+            orderSummary += `-------------------------\n`;
+            orderSummary += `*Name:* ${name}\n`;
+            orderSummary += `*Fulfillment:* ${selectedType}\n`;
+            orderSummary += `*Location / Notes:* ${notes}\n\n`;
+            orderSummary += `*Ordered Items:*\n`;
+
+            let grandTotal = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+                orderSummary += `• ${item.name} (x${item.quantity}) - GH₵${itemTotal}\n`;
+            });
+
+            orderSummary += `\n*Total Amount:* GH₵${grandTotal}\n`;
+            orderSummary += `-------------------------\n`;
+            orderSummary += `_MoMo Payment Reference Number: 0207125221_`;
+
+            const encodedMessage = encodeURIComponent(orderSummary);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Copy Clipboard Helper
+        function copyToClipboard(text, msgId) {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const msg = document.getElementById(msgId);
+            if (msg) {
+                msg.classList.remove('opacity-0');
+                setTimeout(() => {
+                    msg.classList.add('opacity-0');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
